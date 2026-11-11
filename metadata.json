@@ -1,0 +1,6 @@
+{
+  "name": "Wholesale Connect USA",
+  "description": "B2B Wholesale CRM & Business Management System connecting Amazon sellers with verified USA wholesale suppliers and distributors.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

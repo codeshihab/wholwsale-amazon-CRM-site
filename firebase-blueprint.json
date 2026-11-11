@@ -1,0 +1,186 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Authenticated business owner or CRM operator",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "businessName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["owner", "admin", "agent"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "email", "businessName"]
+    },
+    "Buyer": {
+      "title": "Buyer / Amazon Seller",
+      "description": "Amazon wholesale seller looking for suppliers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "buyerCustomId": { "type": "string", "maxLength": 30 },
+        "contactName": { "type": "string", "maxLength": 100 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string", "maxLength": 30 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "facebookUrl": { "type": "string", "maxLength": 200 },
+        "linkedinUrl": { "type": "string", "maxLength": 200 },
+        "website": { "type": "string", "maxLength": 200 },
+        "amazonStoreUrl": { "type": "string", "maxLength": 250 },
+        "country": { "type": "string", "maxLength": 60 },
+        "state": { "type": "string", "maxLength": 60 },
+        "city": { "type": "string", "maxLength": 60 },
+        "businessType": { "type": "string", "maxLength": 60 },
+        "sellingModel": { "type": "string", "enum": ["FBA", "FBM", "Both"] },
+        "categories": { "type": "array" },
+        "interestedBrands": { "type": "array" },
+        "requiredProducts": { "type": "string", "maxLength": 500 },
+        "purchasingBudget": { "type": "number" },
+        "preferredLocation": { "type": "string", "maxLength": 100 },
+        "minProfitRequirement": { "type": "number" },
+        "monthlyCapacity": { "type": "number" },
+        "currentSupplierStatus": { "type": "string", "maxLength": 200 },
+        "leadSource": { "type": "string", "maxLength": 80 },
+        "facebookGroupName": { "type": "string", "maxLength": 100 },
+        "status": { 
+          "type": "string", 
+          "enum": ["New Lead", "Contacted", "Interested", "Qualified", "Matching", "Introduced", "Active Client", "Inactive", "Rejected"] 
+        },
+        "notes": { "type": "string", "maxLength": 2000 },
+        "dateAdded": { "type": "string" },
+        "lastContactDate": { "type": "string" },
+        "nextFollowUpDate": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "contactName", "companyName", "email", "status", "ownerId"]
+    },
+    "Supplier": {
+      "title": "Wholesale Supplier",
+      "description": "USA brand, manufacturer, or distributor",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "supplierCustomId": { "type": "string", "maxLength": 30 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "contactName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string", "maxLength": 30 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "website": { "type": "string", "maxLength": 200 },
+        "facebookPage": { "type": "string", "maxLength": 200 },
+        "linkedinUrl": { "type": "string", "maxLength": 200 },
+        "country": { "type": "string", "maxLength": 60 },
+        "state": { "type": "string", "maxLength": 60 },
+        "city": { "type": "string", "maxLength": 60 },
+        "companyType": { "type": "string", "enum": ["Brand", "Manufacturer", "Distributor", "Wholesaler"] },
+        "categories": { "type": "array" },
+        "availableBrands": { "type": "array" },
+        "catalogUrl": { "type": "string", "maxLength": 300 },
+        "priceListUrl": { "type": "string", "maxLength": 300 },
+        "moq": { "type": "number" },
+        "minimumOrderValue": { "type": "number" },
+        "shippingLocations": { "type": "string", "maxLength": 200 },
+        "shippingTerms": { "type": "string", "maxLength": 200 },
+        "paymentTerms": { "type": "string", "maxLength": 200 },
+        "amazonAcceptance": { "type": "string", "enum": ["Yes", "No", "Unknown"] },
+        "resellerProgram": { "type": "string", "enum": ["Yes", "No", "Unknown"] },
+        "invoiceAvailability": { "type": "string", "maxLength": 200 },
+        "verificationStatus": { "type": "string", "enum": ["Not Verified", "Verification Pending", "Verified", "Rejected"] },
+        "status": { 
+          "type": "string", 
+          "enum": ["New Lead", "Contacted", "Interested", "Qualified", "Matching", "Introduced", "Active Supplier", "Inactive", "Rejected"] 
+        },
+        "leadSource": { "type": "string", "maxLength": 80 },
+        "notes": { "type": "string", "maxLength": 2000 },
+        "dateAdded": { "type": "string" },
+        "nextFollowUpDate": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "companyName", "contactName", "email", "status", "verificationStatus", "ownerId"]
+    },
+    "Deal": {
+      "title": "Deal and Introduction",
+      "description": "Introduction and wholesale transaction between buyer and supplier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "dealCustomId": { "type": "string", "maxLength": 30 },
+        "buyerId": { "type": "string" },
+        "supplierId": { "type": "string" },
+        "matchId": { "type": "string" },
+        "buyerName": { "type": "string", "maxLength": 100 },
+        "supplierName": { "type": "string", "maxLength": 120 },
+        "productName": { "type": "string", "maxLength": 200 },
+        "productCategory": { "type": "string", "maxLength": 100 },
+        "buyerConsent": { "type": "boolean" },
+        "supplierConsent": { "type": "boolean" },
+        "introductionDate": { "type": "string" },
+        "introductionMethod": { "type": "string", "enum": ["Email Introduction", "WhatsApp Group", "Zoom Meeting", "Direct Handshake"] },
+        "status": { 
+          "type": "string", 
+          "enum": ["Potential Deal", "Awaiting Consent", "Ready for Introduction", "Introduced", "Negotiation", "Order Placed", "Payment Confirmed", "Deal Completed", "Cancelled", "Disputed"] 
+        },
+        "estimatedOrderValue": { "type": "number" },
+        "actualOrderValue": { "type": "number" },
+        "commissionAgreement": { "type": "string", "maxLength": 300 },
+        "notes": { "type": "string", "maxLength": 2000 },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "buyerId", "supplierId", "status", "ownerId"]
+    },
+    "Commission": {
+      "title": "Commission Record",
+      "description": "Referral commission tracking and payment schedule",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "dealId": { "type": "string" },
+        "buyerName": { "type": "string", "maxLength": 100 },
+        "supplierName": { "type": "string", "maxLength": 120 },
+        "payer": { "type": "string", "enum": ["Supplier", "Buyer", "Split 50/50"] },
+        "commissionType": { "type": "string", "enum": ["Percentage", "Fixed Amount"] },
+        "rate": { "type": "number" },
+        "orderValue": { "type": "number" },
+        "commissionAmount": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "balanceRemaining": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 10 },
+        "status": { "type": "string", "enum": ["Pending", "Due", "Partially Paid", "Paid", "Overdue", "Cancelled"] },
+        "agreementDate": { "type": "string" },
+        "expectedPaymentDate": { "type": "string" },
+        "actualPaymentDate": { "type": "string" },
+        "paymentMethod": { "type": "string", "maxLength": 80 },
+        "transactionReference": { "type": "string", "maxLength": 100 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "dealId", "commissionAmount", "status", "ownerId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Workspace user account profiles"
+    },
+    "/buyers/{buyerId}": {
+      "schema": "Buyer",
+      "description": "Amazon wholesale buyers and sellers"
+    },
+    "/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "USA wholesale suppliers, brands, and distributors"
+    },
+    "/deals/{dealId}": {
+      "schema": "Deal",
+      "description": "Introductions and wholesale deal transactions"
+    },
+    "/commissions/{commissionId}": {
+      "schema": "Commission",
+      "description": "Referral commission records and financial settlements"
+    }
+  }
+}
